@@ -3,19 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     tools:context=".MainActivity">
 
     <fragment
         android:id="@+id/calendarFragment"
         android:name="fi.tuni.simple_calendar.simpleCalendarViewFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
 
     <fragment
         android:id="@+id/eventFragment"
         android:name="fi.tuni.simple_calendar.simpleEventViewFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
 
 </LinearLayout>
