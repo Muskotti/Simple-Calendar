@@ -4,11 +4,13 @@ public class eventItem {
     private int eventId;
     private String eventName;
     private String eventText;
+    private String date;
 
-    public eventItem(int eventId, String eventName, String eventText) {
+    public eventItem(int eventId, String eventName, String eventText, String date) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.eventText = eventText;
+        this.date = date;
     }
 
     public int getEventId() {
@@ -35,12 +37,21 @@ public class eventItem {
         this.eventText = eventText;
     }
 
+    public String getDate() {
+        return this.date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "eventItem{" +
                 "eventId=" + eventId +
                 ", eventName='" + eventName + '\'' +
                 ", eventText='" + eventText + '\'' +
+                ", date='" + this.date + '\'' +
                 '}';
     }
 }

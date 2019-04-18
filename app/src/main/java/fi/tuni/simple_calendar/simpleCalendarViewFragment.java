@@ -20,7 +20,26 @@ public class simpleCalendarViewFragment extends Fragment {
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                callback.itemSelected(year, month, dayOfMonth);
+                String newYear = "" + year;
+                String newMonth = "00";
+                String date = "00";
+
+                if(dayOfMonth < 10) {
+                    date = "0" + dayOfMonth;
+                } else {
+                    date = "" + dayOfMonth;
+                }
+
+                int i = month;
+                i++;
+
+                if(month < 10) {
+                    newMonth = "0" + i;
+                } else {
+                    newMonth = "" + i;
+                }
+
+                callback.itemSelected(newYear, newMonth, date);
             }
         });
         callback = (dateSelected) getActivity();

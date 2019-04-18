@@ -3,7 +3,6 @@ package fi.tuni.simple_calendar;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,8 +25,7 @@ public class MainActivity extends AppCompatActivity implements dateSelected {
     }
 
     @Override
-    public void itemSelected(int year, int month, int dayOfMonth) {
-        simpleEventViewFragment ef = (simpleEventViewFragment) getSupportFragmentManager().findFragmentById(R.id.eventFragment);
+    public void itemSelected(final String year, final String month, final String dayOfMonth) {
 
         //TODO: get data from selected date
 
@@ -40,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements dateSelected {
             protected Object doInBackground(Object[] objects) {
                 OkHttpClient client = new OkHttpClient();
                 Request request = new Request.Builder()
-                        .url("https://desolate-mesa-25154.herokuapp.com/db")
+                        .url("https://desolate-mesa-25154.herokuapp.com/db/" + year + "-" + month + "-" + dayOfMonth)
                         .build();
 
                 Response response = null;
@@ -53,10 +51,11 @@ public class MainActivity extends AppCompatActivity implements dateSelected {
 
                     for (int i=0; i<Jarray.length(); i++) {
                         JSONObject actor = Jarray.getJSONObject(i);
+                        String date = actor.getString("date");
                         String text = actor.getString("eventText");
                         String name = actor.getString("makerName");
                         String id = actor.getString("eventId");
-                        eventItemsList.add(new eventItem(Integer.parseInt(id),name,text));
+                        eventItemsList.add(new eventItem(Integer.parseInt(id),name,text,date));
                     }
 
                 } catch (IOException e) {
