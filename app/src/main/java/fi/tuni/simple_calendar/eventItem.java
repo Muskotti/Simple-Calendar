@@ -47,11 +47,6 @@ public class eventItem {
 
     @Override
     public String toString() {
-        return "eventItem{" +
-                "eventId=" + eventId +
-                ", eventName='" + eventName + '\'' +
-                ", eventText='" + eventText + '\'' +
-                ", date='" + this.date + '\'' +
-                '}';
+        return eventName + ": " + eventText;
     }
 }

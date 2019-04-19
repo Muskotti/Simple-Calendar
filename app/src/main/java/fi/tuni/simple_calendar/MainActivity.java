@@ -26,11 +26,7 @@ public class MainActivity extends AppCompatActivity implements dateSelected {
 
     @Override
     public void itemSelected(final String year, final String month, final String dayOfMonth) {
-
-        //TODO: get data from selected date
-
         AsyncTask async = new AsyncTask() {
-
             ArrayList<eventItem> eventItemsList = new ArrayList<>();
             simpleEventViewFragment ef = (simpleEventViewFragment) getSupportFragmentManager().findFragmentById(R.id.eventFragment);
 

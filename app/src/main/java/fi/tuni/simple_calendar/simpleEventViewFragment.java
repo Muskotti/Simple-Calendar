@@ -1,5 +1,6 @@
 package fi.tuni.simple_calendar;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -37,6 +39,21 @@ public class simpleEventViewFragment extends Fragment {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
         final String newDate = dateFormat.format(cal.getTime());
+
+        Button button = (Button) view.findViewById(R.id.addEvent);
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                try {
+                    Intent i = new Intent(getActivity(), addEvent.class);
+                    startActivity(i);
+                } catch(Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
         AsyncTask async = new AsyncTask() {
 
@@ -77,7 +94,9 @@ public class simpleEventViewFragment extends Fragment {
 
             @Override
             protected void onPostExecute(Object o) {
-                setList(eventItemsList);
+                if(eventItemsList != null && !eventItemsList.isEmpty()) {
+                    setList(eventItemsList);
+                }
                 super.onPostExecute(o);
             }
         }.execute();
