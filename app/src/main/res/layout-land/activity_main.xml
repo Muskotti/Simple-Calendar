@@ -29,7 +29,7 @@
         android:layout_marginTop="0dp"
         android:layout_marginBottom="0dp"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-8026772227087925/2649369719">
+        ads:adUnitId="@string/add_name">
     </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>
