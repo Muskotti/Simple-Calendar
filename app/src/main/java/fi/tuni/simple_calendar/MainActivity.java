@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements dateSelected {
             protected void onPostExecute(Object o) {
                 if(eventItemsList != null && !eventItemsList.isEmpty()) {
                     ef.setList(eventItemsList);
+                } else {
+                    ef.setViewEmpty();
                 }
                 super.onPostExecute(o);
             }

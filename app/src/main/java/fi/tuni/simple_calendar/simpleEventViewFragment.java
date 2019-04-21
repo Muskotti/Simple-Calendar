@@ -96,6 +96,8 @@ public class simpleEventViewFragment extends Fragment {
             protected void onPostExecute(Object o) {
                 if(eventItemsList != null && !eventItemsList.isEmpty()) {
                     setList(eventItemsList);
+                } else {
+                    setViewEmpty();
                 }
                 super.onPostExecute(o);
             }
@@ -106,6 +108,12 @@ public class simpleEventViewFragment extends Fragment {
 
     public void setList(ArrayList<eventItem> eventItemsList) {
         ArrayAdapter<eventItem> itemsAdapter = new ArrayAdapter<>(getActivity(), R.layout.list_item, eventItemsList);
+        ListView listView = view.findViewById(R.id.publicEventList);
+        listView.setAdapter(itemsAdapter);
+    }
+
+    public void setViewEmpty() {
+        ArrayAdapter<eventItem> itemsAdapter = new ArrayAdapter<>(getActivity(), R.layout.list_item, new ArrayList<eventItem>());
         ListView listView = view.findViewById(R.id.publicEventList);
         listView.setAdapter(itemsAdapter);
     }
