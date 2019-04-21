@@ -4,6 +4,10 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,10 +22,16 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity implements dateSelected {
 
+    private AdView mAdView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        MobileAds.initialize(this, "ca-app-pub-8026772227087925~3826720018");
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override
@@ -65,7 +75,9 @@ public class MainActivity extends AppCompatActivity implements dateSelected {
 
             @Override
             protected void onPostExecute(Object o) {
-                ef.setList(eventItemsList);
+                if(eventItemsList != null && !eventItemsList.isEmpty()) {
+                    ef.setList(eventItemsList);
+                }
                 super.onPostExecute(o);
             }
         }.execute();

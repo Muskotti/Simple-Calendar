@@ -17,6 +17,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".addEvent"></activity>
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-8026772227087925~3826720018"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
