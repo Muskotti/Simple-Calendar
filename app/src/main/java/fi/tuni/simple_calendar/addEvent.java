@@ -40,55 +40,54 @@ public class addEvent extends AppCompatActivity {
         String month;
         String day;
 
-        int j = dateText.getMonth() + 1;
-        if(j < 10) {
-            month = "0" + j;
-        } else {
-            month = "" + j;
-        }
-
-        if(dateText.getDayOfMonth() < 10) {
-            day = "0" + dateText.getDayOfMonth();
-        } else {
-            day = "" + dateText.getDayOfMonth();
-        }
-
-        String date = dateText.getYear() + "-" + month + "-" + day;
-
-        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        OkHttpClient client = new OkHttpClient();
-
-        JSONObject json = new JSONObject();
-        try {
-            json.put("date", date);
-            json.put("makerName",name);
-            json.put("eventText", text);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        RequestBody body = RequestBody.create(JSON, json.toString());
-        Request request = new Request.Builder()
-                .url("https://desolate-mesa-25154.herokuapp.com/db/addEvent")
-                .post(body)
-                .header("Accept", "application/json")
-                .header("Content-Type", "application/json")
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                String mMessage = e.getMessage().toString();
-                Log.w("failure Response", mMessage);
+        if(name != null && !name.isEmpty() && text != null && !name.isEmpty()) {
+            int j = dateText.getMonth() + 1;
+            if (j < 10) {
+                month = "0" + j;
+            } else {
+                month = "" + j;
             }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                String mMessage = response.body().string();
-                Log.e("onResponse", mMessage);
+            if (dateText.getDayOfMonth() < 10) {
+                day = "0" + dateText.getDayOfMonth();
+            } else {
+                day = "" + dateText.getDayOfMonth();
             }
-        });
 
+            String date = dateText.getYear() + "-" + month + "-" + day;
+
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+            OkHttpClient client = new OkHttpClient();
+
+            JSONObject json = new JSONObject();
+            try {
+                json.put("date", date);
+                json.put("makerName", name);
+                json.put("eventText", text);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            RequestBody body = RequestBody.create(JSON, json.toString());
+            Request request = new Request.Builder()
+                    .url("https://desolate-mesa-25154.herokuapp.com/db/addEvent")
+                    .post(body)
+                    .header("Accept", "application/json")
+                    .header("Content-Type", "application/json")
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    String mMessage = e.getMessage().toString();
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String mMessage = response.body().string();
+                }
+            });
+        }
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }

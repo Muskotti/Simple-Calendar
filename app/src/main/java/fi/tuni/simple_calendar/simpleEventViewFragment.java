@@ -95,6 +95,7 @@ public class simpleEventViewFragment extends Fragment {
             @Override
             protected void onPostExecute(Object o) {
                 if(eventItemsList != null && !eventItemsList.isEmpty()) {
+                    setViewEmpty();
                     setList(eventItemsList);
                 } else {
                     setViewEmpty();
